@@ -1,0 +1,310 @@
+리눅스명령
+
+root로 로그인
+sudo su - root
+
+history -c ==> 히스토리 명령어 삭제
+
+
+reboot 재부팅
+power off 종료
+
+gedit 설치
+sudo apt update && sudo apt install gedit gedit-plugins gedit-common
+
+네트워크 ip 정보 확인
+apt install net-tools
+ifconfig
+
+vi에디터 설치/삭제
+apt-get -y install vim
+apt-get remove vim
+apt-get purge vim ==> 기존 설정파일 포함 모두 삭제
+
+
+문자열 찾기
+/찾을문자 + enter
+n ==> 다음 찾을 문자열
+gg : 제일 척 행으로 이동
+G : 제일 마지막행으로 이동
+ctrl+F :  PageDown
+ctrl+B :  PageUp
+
+man 명령어 => 명령어 옵션 설명
+
+USB인식
+mount /media/USB
+unmount /media/USB
+
+cd /media/현재사용자이름/USB이름
+
+rm -i 파일명 ==> 삭제할지 물어봄
+rm -r 폴더명 ==> 폴더, 하위폴더 모두 삭제
+cp -r 원본폴더 타겟폴더
+chmod 755 파일명 ==> 실행권한 부여, 777 읽고 쓰기 가능
+su - 사용자계정 ==> 계정 변경
+
+wget http://download.aaa.com/bbb.tar.gz
+
+
+dpkg -l 패키지명 ==> 설치된 패키지 정보 조회
+
+tar cvfz my.tar.gz /etc/systemd/ ==> 압축
+tar xfz my.tar.gz ==> 압축
+
+find /etc -name "*.conf"
+
+cron : 주기적 예약 반복 작업
+00 05 1 * * root cp -r /home /backup
+분 시 일 월 요일 ==> 요일 0:일요일 ...
+
+at : 1회성 예약 작업
+
+systemctl status 서비스데몬이름 ==> 서비스 데몬 상태 확인
+systemctl status cron
+
+systemctl start/stop/restart 서비스데몬이름 
+systemctl status 서비스데몬이름 
+systemctl enable/disable 서비스데몬이름 
+
+stty echo ==> 프롬프트에 글자 않보일 경우
+
+ps -ef | grep 프로세스이름(예, ssh)
+
+echo $PATH ==> 환경변수 PATH 출력
+
+printenv 환경변수 출력
+export 환경변수=값 ==> 환경변수 값 수정
+
+ip addr
+
+ufw allow 23/tcp ==> 방화벽에서 텔넷 23포트 허용
+
+ssh 계정명@호스트명(ip주소)
+
+/etc/host.conf
+nsloopup
+server 확인할 네임서버IP
+조회할 URL
+exit
+
+apt-get -y install mariadb-server mariadb-client
+systemctl restart mysql
+ufw allow 3306/tcp 
+
+mysqladmin -u root password '1234'
+mysql -u root -passwordexit
+
+mysql -h IP주소 -u 계정 -p
+
+
+
+
+쉘스크립트
+vi test.sh
+num1=100
+num2=$num1+200
+echo '숫자는 $num2 입니다.'
+-n "문자열" ==> 문자열이 NULL(빈 문자열)이 아니면 참
+-z "문자열" ==> 문자열이 NULL(빈 문자열)이면 참
+수식1 -eq 수식2 ==>  같다면 참 ==> if [ 100 -eq 200 ]
+수식1 -ne 수식2 ==>  같지 않다면 참
+수식1 -gt 수식2 ==>  수식1이 크다면 참
+수식1 -ge 수식2 ==>  수식1이 크거나 같다면 참
+수식1 -lt 수식2 ==>  수식1이 작다면 참
+수식1 -le 수식2 ==>  수식1이 작거나 같다면 참
+
+
+if [ -f $fname ] && [ -s $fname ] ; then
+if [ 변수 = != 조건 ] ==> 조건 각 단어 사이에는 공백이 있어야 함
+then
+    참 실행 명령
+else
+    거짓 실행 명령
+fi
+
+read answer
+case $answer in
+ yes | y | Y | Yes | YES)
+   echo "다행";;
+ [nN]*)
+   echo "No 다행";;
+ *)
+  echo "yes / no만 입력하세요"
+  exit 1;;
+esac
+
+for i in 1 2 3 4 5
+do
+ hap='expr $hap + $i'
+done
+
+while [ 1 ]  ==> [ $i -le 10 ]
+do
+ echp "test"
+done
+
+myFunction () {
+    echo "함수"
+    return
+}
+
+myFunction
+echo "프로그램 종료"
+
+hap () {
+    echo 'expr $1 + $1'
+}
+echo '10 더하기 20은?'
+hap 10 20
+
+str='ls -al'
+eval $str ==> 문자열을 명령문으로 인식해서 실행함
+
+printf "%s" ==> %s는 문자열 출력
+echo "오늘은 $(date) 입니다."
+set $(date)
+echo "오늘은 $4 요일" ==> 4번째 파라미터 출력
+
+exit 0
+
+chmod 755 test.sh
+sh test.sh ==> 실행
+
+
+
+
+
+
+
+
+
+
+
+sudo yum install -y gcc postgresql11-devel \ perl-ExtUtils-MakeMaker perl-DBI perl-DBD-Pg perl-tests
+
+sudo yum localinstall -y /path/to/oracle-instantclient12*.rpm
+
+# InstantClient
+export ORACLE_HOME=/usr/lib/oracle/12.2/client64
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PAT
+export PATH=$ORACLE_HOME/bin:$PATH
+
+source ~/.bash_profile
+
+sqlplus hr/hr1234@//192.168.99.21:1521/ORCLPDB1
+
+
+sudo yum install perl-devel
+Owner Group Other
+rwx r은 파일 읽기(4), w는 파일 쓰기(2), x는 파일 실행(1)
+755 : 파일소유자는 읽고 쓰고 실행, 제3자는 읽고 실행만
+777 : 제3자도 쓰기 권한
+
+# du 자신의 하드공간을 알려면
+# du -s diretory_name 특정 디렉토리의 사용량을 알려면
+# ls -atl
+# cp 화일 복사(copy)
+# mv 파일이름(rename) / 위치(move)변경
+# mkdir download  : download 디렉토리 생성
+# rm test.html : test.html 화일 삭제
+# rm -r <디렉토리> : 디렉토리 전체를 삭제
+# rm -i a.*  : a로 시작하는 모든 파일을 일일이 삭제할 것인지 확인하면서 삭제
+# rmdir cgi-bin : cgi-bin 디렉토리 삭제
+# pwd 현재의 디렉토리 경로를 보여주기
+# pico 리눅스용 에디터
+>put  guestbook.tar.gz : ftp 상태에서 화일 업로드
+>get  guestbook.tar.gz : ftp 상태에서 화일 다운로드
+# chmod 666  guestbook.html : 화일 permission 변경
+# cat : 파일의 내용을 화면에 출력하거나 파일을 만드는 명령( 도스의 TYPE명령)
+# vi newfile :  vi 편집기 상태로 들어감
+# touch newfile : 빈 파일만 생성됨
+# cat > newfile  : vi 편집기 상태로 들어감, 문서 작성후 Ctrl+D로 빠져나옴
+# cat filename         : 파일의 내용을 모두 보여줌
+# head -n filename : n줄 만큼 위세서부터 보여줌
+# tail -n filename     : n줄 만큼 아래에서부터 보여줌
+# tar cvf [파일명(.tar, _tar)] 압축할 파일(또는 디렉토리): 묶을때
+# tar xvf [파일명(.tar, _tar)]  :  풀 때
+# compress    [파일명]     : 압축시
+# uncompress [파일명]    : 해제시
+# gzip     [파일명]    : 압축시
+# gzip -d [파일명]   : 해제시
+# echo 어떤 것을  echo 화면에 인쇄한다.
+# ill x : 프로세스 x를 종료 (x는 ps 명령으로 알 게 된 PID)
+# ps : 지금 작동중인 모든 프로세스들을 보여줌
+# find ./ -name "*.jpg"
+# redirection - 화면의 출력 결과를 파일로 저장
+# env : 환경 변수를 출력합니다.
+# ps -ef | grep tomcat
+# kill 9 *****
+# netstat -nap | grep :80
+# netstat –atp : 현재 서버에서 열려있는 포트를 사용하고 있는 프로세스를 확인
+# ps –aux : –aux 옵션을 사용하여 프로세스를 출력한 명령어
+# pstree –p : 실행 중인 프로세스들을 트리(tree)형식으로 보여주는 명령어
+
+스프링부트 jar 파일 백그라운드 실행방법
+nohup java –jar [빌드된 jar 파일] &
+
+ps -ef|grep '[파일명]'
+ps -ef | grep java
+
+kill -9 [pid번호]
+
+# vi
+# df -h : 디크스 정보 출력
+# du -sh * : 현재폴더와 파일 크기
+# ifconfig : IP, Mac 정보
+# netstat -an : 열려있는 서버 포트
+# find | grep 검색어
+sudo apt-get install : 필요한 패키지,프로그램을 설치 할 수 있는 패키지 관리 도구
+nohup : 내 스크립트가 터미널을 끄더라도 계속 실행시키고 싶을 때 &(백그라운드라는 뜻)와 함께 백그라운드로 실행
+sudo reboot
+
+
+
+for num in 1 2 3 4 5
+     do
+         echo $num
+     done
+
+alias
+이들 앨리어스는 [alias ls 'ls -al'] 같이 사용하시면 되는데, 한 번 지정한 alias를 계속해서 이용하시려면, 자신의 홈디렉토리에 있는
+.cshrc(Hidden 속성)을 pico등의 에디터를 이용하여 변경시 키면 됩니다.
+
+sudo yum install perl-DBI.x86_64
+
+sudo yum install wget
+wget https://cpan.metacpan.org/authors/id/Z/ZA/ZARQUON/DBD-Oracle-1.76.tar.gz
+tar -xvzf DBD-Oracle-1.76.tar.gz
+cd DBD-Oracle-1.76
+perl Makefile.PL
+make && make test
+sudo make install
+
+sudo yum install perl-CPAN
+perl -MCPAN -e 'install DBD::Oracle' # configure for sudo
+
+wget https://github.com/darold/ora2pg/archive/v20.0.tar.gz
+tar -xvzf v20.0.tar.gz
+cd ora2pg-20.0
+perl Makefile.PL
+make
+sudo make install
+
+
+In ora2pg-20.0/ora2pg.conf:
+PG_VERSION      11
+ORACLE_DSN      dbi:Oracle:host=192.168.99.21;port=1521;service_name=ORCLPDB1
+ORACLE_USER     hr
+ORACLE_PWD      hr1234
+USER_GRANTS	    1
+
+EXPORT_SCHEMA   1
+SCHEMA          hr
+TRANSACTION     READONLY
+
+# This is needed for Oracle XE 11 with ora2pg <= v20, but safe
+# to add for any version
+SYSUSERS        APEX_040000
+
+ora2pg -t SHOW_VERSION -c ora2pg.conf

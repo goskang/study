@@ -12,15 +12,76 @@ ssh-rsa 부터 시작한 텍스트들을 모두 드래그로 복사
 github에 로그인을 하시고, 우측상단의 메뉴 버튼을 클릭후 setting > SSH and GPG keys
 SSH Keys 신규 등록
 
->git clone git@github.com:goskang/study.git
+개념
+- working : 작업을 하는 공간, untracked
+- staging : 작업을 임시 저장하는 공간, tracked
+- repository : 실제로 저장 기록하는 공간
 
-sss
+.gitignore
+#주석 밑의 파일, 폴더는 제외함
+dbinfo.php
+*.obj
+/pds/ => 폴더
 
-3. git status ==> git 상태관리
-4. git add 파일명 / git add * ==> git 파일 트레킹
-5. git commit -m "코멘트" ==> 커밋
-5. git branch -M main ==> 메인 브랜치 이동
-6. git remote add origin git@github.com:goskang/study.git
-7. git push -u origin main
-8. git log 
-9. git clone https://github.com/goskang/study.git
+
+git clone 원격저장소URL 새폴더이름
+git remote add 원격저장소별칭 원격저장소URL
+git remote add origin https://github.com/goskang/test.git
+git remote -v : 원격저장소 목록 확인
+
+git remote rm 원격저장소별칭 : 등록된 원격저장소 삭제
+git remote rm origin 
+
+git init ==> .git 폴더 생성 확인
+
+git config -global user.name "사용자이름"
+git config user.email "사용자이메일"
+
+
+* 기본 순서
+pull ==> 파일작업 ==> commit -am "메시지" ==> pull ==> push
+
+
+git add 파일명 : 스테이지 영역에 등록되며 tracked 상태로 변경됨
+git rm --chched 파일명 : 스테이지 영역에서 삭제되며 untracked 상태로 변경됨
+
+한번이라고 커밋했다면 reset 명령어를 사용해야 함
+git reset HEAD 파일명 : HEAD는 최종 커밋 작업 위치를 가리킴
+
+git mv 이전파일명 변경할파일명
+
+git commit -a : 워킹폴더의 파일을 스테이징 영역으로 등록(add)과 커밋(commit)을 동시에 실행함
+git commit -m "커밋메시지"
+git commit -am "커밋메시지"
+git commit -amend : 방금전 커밋메시지를 재수정할 때 사용
+
+git log : 로그 기록 확인
+
+git diff : 워킹 폴더와 스테이징 영역간 변경 사항 비교
+
+git checkout -- 수정파일명 : 수정한 파일을 커밋 전 마지막 내용으로 되돌림
+
+git status ==> git 상태관리
+
+git push origin master : git push 원격저장소별칭 브랜치명 으로 서버로 전송
+
+git pull : 서버에서 내려받고 현재 브랜치와 자동 병합함
+
+git fetch : 서버에서 내려받기지만 현재 브랜치와 자동 병합하지 않음
+git merge origin/master : fetch 명령어로 내려받은 커밋을 로컬 저장소 브랜치와 병합
+
+git branch : 브랜치 목록 조회
+git branch 브랜치이름 : 브랜치 생성
+git branch -v : 브랜치 세부사항 확인
+git branch -d 브랜치이름  : 브랜치 삭제
+
+git checkout 브랜치이름 : 브랜치로 이동
+git checkout -b 브랜치이름 : 브랜치 수정 후 브랜치로 이동
+
+git checkout -  : 바로 이전 브랜치로 이동
+
+
+리눅스 git 설치
+sudo apt install git
+git --version
+삭제 : apt remove git

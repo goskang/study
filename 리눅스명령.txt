@@ -3,6 +3,34 @@
 root로 로그인
 sudo su - root
 
+
+/bin ==> 기본적인 명령어가 저장
+/dev ==> 시스템 디바이스(device)파일을 저장하고 있는 디렉토리. 하드디스크 장치파일 /dev/sda, CD-ROM 장치파일 /dev/cdrom 등과 같은 장치파일들이 존재하는 디렉토리
+/etc ==> 시스템의 거의 모든 설정파일이 존재하는 디렉토리. 
+  /etc/sysconfig(시스템 제어판용 설정파일)
+  /etc/passwd(사용자관리 설정파일)
+  /etc/named.conf(DNS 설정파일)
+/etc/httpd/ ==> RPM 으로 설치된 아파치 설정파일(httpd.conf 등)들이 저장된 디렉토리
+/home ==> 사용자의 홈디렉토리
+/media ==> DVD, CD-ROM, USB 등과 같은 탈부착이 가능한 장치들의 마운트포인트로 사용되는 디렉토리
+/sbin ==> ifconfig, e2fsck, ethtool, halt 등과 같이 주로 시스템 관리자들이 사용하는 시스템관리자용 명령어를 저장하고 있는 디렉토리
+/usr/src/ ==> 프로그램 소스(주로 커널소스)가 저장되는 디렉토리
+/usr/local/ ==> MySQL, Apache, PHP 등과 같은 어플리케이션들을 소스로 컨파일설치할 때 사용되는 장소
+/var/log/ ==> 시스템로그파일(messages, secure, xferlog 파일등)이 저장되는 디렉토리
+/var/ftp/ ==> vsftp 등과 같은 FTP 서비스를 위한 다운로드될 파일들 즉, FTP 홈디렉토리
+/var/named/ ==> BIND 즉, DNS 에서 사용하는 zone 파일들이 저장되는 디렉토리.
+/var/spool/mail/ ==> 각 계정사용자들의 메일파일이 저장되는 디렉토리
+/var/spool/cron/ ==> 각 사용자들의 cron 설정파일들이 저장된 디렉토리
+/var/spool/at/ ==> atd 즉, 예약작업에 관한 파일들이 저장되는 디렉토리
+
+자주 사용하는 명령어를 특정 문자로 입력해두고 간편하게 사용하기 위한 것으로 
+command alias 라고도 합니다. 
+.bashrc에 리눅스 설치시 몇개의 alias 가 자동 설정되어 있습니다.
+
+alias apachestart='/usr/local/apache/bin/apachectl start' 
+alias apachestop='/usr/local/apache/bin/apachectl stop' 
+alias apacherestart='/usr/local/apache/bin/apachectl restart'
+
 history -c ==> 히스토리 명령어 삭제
 
 
@@ -91,6 +119,9 @@ exit
 apt-get -y install mariadb-server mariadb-client
 systemctl restart mysql
 ufw allow 3306/tcp 
+
+dnf -y install mariadb
+
 
 mysqladmin -u root password '1234'
 mysql -u root -passwordexit
@@ -260,8 +291,6 @@ sudo apt-get install : 필요한 패키지,프로그램을 설치 할 수 있는
 nohup : 내 스크립트가 터미널을 끄더라도 계속 실행시키고 싶을 때 &(백그라운드라는 뜻)와 함께 백그라운드로 실행
 sudo reboot
 
-
-
 for num in 1 2 3 4 5
      do
          echo $num
@@ -273,38 +302,7 @@ alias
 
 sudo yum install perl-DBI.x86_64
 
-sudo yum install wget
-wget https://cpan.metacpan.org/authors/id/Z/ZA/ZARQUON/DBD-Oracle-1.76.tar.gz
-tar -xvzf DBD-Oracle-1.76.tar.gz
-cd DBD-Oracle-1.76
-perl Makefile.PL
-make && make test
-sudo make install
-
-sudo yum install perl-CPAN
 perl -MCPAN -e 'install DBD::Oracle' # configure for sudo
 
 wget https://github.com/darold/ora2pg/archive/v20.0.tar.gz
 tar -xvzf v20.0.tar.gz
-cd ora2pg-20.0
-perl Makefile.PL
-make
-sudo make install
-
-
-In ora2pg-20.0/ora2pg.conf:
-PG_VERSION      11
-ORACLE_DSN      dbi:Oracle:host=192.168.99.21;port=1521;service_name=ORCLPDB1
-ORACLE_USER     hr
-ORACLE_PWD      hr1234
-USER_GRANTS	    1
-
-EXPORT_SCHEMA   1
-SCHEMA          hr
-TRANSACTION     READONLY
-
-# This is needed for Oracle XE 11 with ora2pg <= v20, but safe
-# to add for any version
-SYSUSERS        APEX_040000
-
-ora2pg -t SHOW_VERSION -c ora2pg.conf

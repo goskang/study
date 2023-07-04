@@ -89,4 +89,4 @@ git --version
 한번에 commit add push 실행
 git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'
 git cmp "커밋메시지"
-편리한 기능 추가됨
+

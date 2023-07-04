@@ -1,2 +1,115 @@
-환경설정 정리
-AWS에 배포필요
+오라클 우분투 환경설정
+1. Java 설정
+$ sudo apt-get update
+$ sudo apt-get upgrade
+또는
+$sudo apt-get update && sudo apt-get upgrade
+
+$java -version
+$sudo apt-get install openjdk-11-jdk
+$java -version
+
+환경설정
+JAVA_HOME 설정을 위해 ~/.bashrc 파일에 다음을 추가
+
+# ~/.bashrc 열기
+$ sudo gedit ~/.bashrc
+
+# ~/.bashrc 파일에 설정 추가
+# JAVA_HOME settings
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+export PATH=$PATH:$JAVA_HOME/bin
+
+# 현재 실행중인 shell에 즉시 적용 (새로 실행한 shell에서는 필요없음)
+$ source ~/.bashrc
+
+# 설정 확인
+$ echo $JAVA_HOME
+/usr/lib/jvm/java-11-openjdk-am64
+
+# 설치된 JAVA 삭제시
+$ sudo apt-get purge openjdk*
+
+방화벽 오픈
+$ sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 3306 -j ACCEPT
+$ sudo netfilter-persistent save    
+$sudo iptables -L
+
+# netfilter-persistent save 안되는 경우
+$ sudo apt install -y netfilter-persistent
+
+
+
+$sudo passwd root
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+
+
+$ date
+Sat Apr 17 16:46:38 UTC 2021
+
+$ sudo dpkg-roconfigigure tzdata
+Current default time zone: 'Asia/Seoul'
+
+
+
+
+$sudo apt-get install rpm
+$sudo apt-get install alien
+$wget http://repo.mysql.com/mysql80-community-release-el7-1.noarch.rpm
+$sudo alien -c mysql80-community-release-el7-1.noarch.rpm
+
+$sudo apt-get install yum
+아래와 같은 결과가 반환되며 정상적으로 설치되지 않을 경우 /etc/apt/sources.list 파일에 오류가 있을 수 있습니다.
+$sudo cp sources.list sources.list.back
+$sudo vi sources.list
+# 아래 내용 추가
+deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu bionic-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu bionic-updates main restricted universe multiverse
+:wq
+
+apt-get install sudo
+
+# PATH=”/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin”
+
+# export PATH
+
+
+$sudo apt-get update
+
+$sudo apt-get install wget
+
+$mkdir /downloads
+
+$cd /downloads
+
+$wget http://repo.mysql.com/mysql80-community-release-el7-1.noarch.rpm
+
+$dpkg -i mysql-apt-config_0.8.12-1_all.deb
+
+$apt-cache policy mysql-server
+
+$apt-get update
+
+$apt-cache policy mysql-server
+
+$sudo apt install mysql-client=5.7.*-1ubuntu18.04
+$sudo apt install mysql-community-server=5.7.*-1ubuntu18.04
+
+$ps -ef | grep mysq
+$ netstat -nap | grep LISTEN
+
+/etc/mysql/mysql.conf.d/mysqld.cnf 을 변경
+
+[mysqld]
+collation-server = utf8_unicode_ci
+init-connect='SET NAMES utf8'
+character-set-server = utf8
+
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8

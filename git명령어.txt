@@ -85,3 +85,6 @@ git checkout -  : 바로 이전 브랜치로 이동
 sudo apt install git
 git --version
 삭제 : apt remove git
+
+한번에 commit add push 실행
+git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'

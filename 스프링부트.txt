@@ -52,7 +52,33 @@ Sat Apr 17 16:46:38 UTC 2021
 $ sudo dpkg-roconfigigure tzdata
 Current default time zone: 'Asia/Seoul'
 
+마리아DB 설치
+$sudo apt-get install -y mariadb-server
+$sudo mysql
+SELECT @@global.time_zone, @@session.time_zone;
 
+$sudo timedatectl set-timezone 'Asia/Seoul'
+#date
+
+$sudo systemctl restart mysqld
+$sudo mysql
+SELECT now();
+
+root 계정 비밀번호 변경
+update user set plugin='' where User='root';
+set password = password('YOUR PASSWORD');
+set password = password('djflsdl12.');
+flush privileges;
+$mysql -u root -p
+SET GLOBAL time_zone='+09:00';
+SET time_zone='+09:00';
+
+외부 IP에서의 접속을 허용하고 싶은 경우
+$sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
+bind-address 부분을 0.0.0.0으로 변경하세요.
+port = 3306
+저장후
+$sudo systemctl restart mysqld
 
 
 $sudo apt-get install rpm
@@ -113,3 +139,5 @@ default-character-set=utf8
 
 [mysql]
 default-character-set=utf8
+
+https://velog.io/@whattsup_kim/Ubuntu-%EC%B4%88%EA%B8%B0-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0

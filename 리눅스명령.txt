@@ -26,11 +26,41 @@ sudo su - root
 
 
 
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+sudo apt-get install yum
+
+
+mysql -u root -p
+CREATE DATABASE TEST01 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+create table TABLE_NAME (
+  id int(4) primary key,
+    -> ...
+  ) default character set utf8 collate utf8_general_ci;
+
+desc 테이블명;
+
+select user, host, password from mysql.user;
+
+
+create user '유저명'@'접속허용할 IP' identified by '유저비밀번호'; 
+외부에서 접속시 해당 IP나 어디서든 접속이 가능도록 %를 줘야 한다.
+
+외부 연결 않되면 
+putty -> putty gen으로 **.key => **.ppk로 변환 후 
+SSH탭에서 키 선택 후 연결 시도해 볼 것
 
 
 
 
+grant all privileges on DB명.Table명 to '유저명'@'접속허용할 IP' with grant option; 
+SET PASSWORD FOR 'user'@'host' = PASSWORD('newpass'); 
 
+Port 확인
+netstat -tnlp
+또는
+sudo snap install nmap  # version 7.93
+nmap localhost
 
 
 

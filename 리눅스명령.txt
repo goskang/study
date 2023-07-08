@@ -61,8 +61,10 @@ netstat -tnlp
 또는
 sudo snap install nmap  # version 7.93
 nmap localhost
+ip addr | grep "inet "
 
-
+맥어드레스 확인
+ifconfig
 
 
 
@@ -350,3 +352,46 @@ perl -MCPAN -e 'install DBD::Oracle' # configure for sudo
 
 wget https://github.com/darold/ora2pg/archive/v20.0.tar.gz
 tar -xvzf v20.0.tar.gz
+
+
+사용자 계정 추가 
+sudo adduser newuser
+sudo deluser -r newuser
+
+sudo usermod -aG sudo newuser
+
+$ su # root 계정으로 이동
+$ su - # root 계정의 환경 변수를 가져오며 이동
+$ su <유저 이름> # 유저 계정으로 이동
+
+whoami
+현재 사용자를 확인하는 명령어 입니다.
+
+유저의 정보
+cat /etc/passwd
+
+파일 검색
+$ find . *.log : 디렉토리 뒤짐
+
+실행파일 위치 찾기
+$ whereis ls
+$ whereis rm
+
+git 설치
+$ apt-get install git
+소스코드 다운
+$ git clone [소스코드 url] [디렉토리명] : 명시한 디렉토리에 소스코드 다운받는다.
+git config --global user.email "goskang@naver.com"
+git config --global user.name "goskang"
+
+
+디렉토리 구조
+/bin: 사용자가 사용하는 명령어 모음
+/sbin: 관리자가 사용하는 명령어 모음
+/etc: 프로그램 설정을 관리하는 디렉토리
+/etc/init.d: daemon의 목적을 가진 프로그램들 있음.
+/var: 내용이 바뀔 수 있는 파일들 모음
+/tmp: 임시파일들. 컴퓨터가 꺼지면 날아간다.
+/home: 사용자들의 파일들이 저장되는 디렉토리
+/lib: /bin과 /sbin에 있는 프로그램들이 사용하는 라이브러리 모음
+/usr: 유저가 다운받은 프로그램들 저장..

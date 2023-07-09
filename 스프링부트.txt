@@ -7,6 +7,7 @@ $sudo apt-get update && sudo apt-get upgrade
 
 $java -version
 $sudo apt-get install openjdk-11-jdk
+$sudo apt install openjdk-18-jdk-headless
 $java -version
 
 환경설정
@@ -14,6 +15,7 @@ JAVA_HOME 설정을 위해 ~/.bashrc 파일에 다음을 추가
 
 # ~/.bashrc 열기
 $ sudo gedit ~/.bashrc
+sudo vi ~/.bashrc
 
 # ~/.bashrc 파일에 설정 추가
 # JAVA_HOME settings
@@ -25,7 +27,92 @@ $ source ~/.bashrc
 
 # 설정 확인
 $ echo $JAVA_HOME
-/usr/lib/jvm/java-11-openjdk-am64
+/usr/lib/jvm/java-18-openjdk-amd64
+
+$ echo CLASSPATH
+:/usr/lib/jvm/java-18-openjdk-amd64/jre/lib/ext:/usr/lib/jvm/java-18-openjdk-amd64/lib/tools.jar
+
+java 테스트
+# mkdir javawork
+# cd javawork
+/javawork# vi Hello.java
+/javawork# ls
+Hello.java
+/javawork# javac Hello.java
+/javawork# ls
+Hello.class  Hello.java
+/javawork# java Hello
+Hello?
+/javawork#
+
+
+
+#!/bin/bash
+
+# compile (lib 폴더 하위에 있는 외부 라이브러리)
+javac -cp Hello.java
+
+# java 실행
+java -cp Hello
+
+if [ $? -eq 0 ]
+then
+    echo "compile worked!"
+else
+    echo "compile failed..."
+fi
+
+
+vim에서 한글 사용
+$ echo 'set encoding=utf-8' >> /etc/vimrc
+$ echo 'set fileencodings=utf-8,cp949' >> /etc/vimrc
+$ echo 'set encoding=utf-8' >> /etc/virc         
+$ echo 'set fileencodings=utf-8,cp949' >> /etc/virc
+$ vi Hello.java   
+
+쉘스크립트 실행
+$ ./runhello.sh  
+
+
+
+#!/bin/bash
+# 이 파일은 test-project를 자동으로 실행시키는 쉘스크립트 파일이다.
+# 전역 설정 방법: 본 파일을 PATH 경로에 위치시키거나, ~/.bashrc를 수정하여 추가하면 된다.
+
+# test-project 디렉터리가 위치한 경로
+# ROOT_PATH는 사용자 환경에 따라 다름
+ROOT_PATH=/home/test-project
+
+# 디렉터리 이동
+cd $ROOT_PATH
+cd src
+
+# compile (lib 폴더 하위에 있는 외부 라이브러리)
+javac -cp ".:$ROOT_PATH/lib/*" TestProject.java
+
+# java 실행
+java -cp ".:$ROOT_PATH/lib/*" TestProject
+
+if [ $? -eq 0 ]
+then
+    echo "compile worked!"
+else
+    echo "compile failed..."
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 설치된 JAVA 삭제시
 $ sudo apt-get purge openjdk*

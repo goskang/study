@@ -75,6 +75,8 @@ $ ./runhello.sh
 
 
 
+
+
 #!/bin/bash
 # 이 파일은 test-project를 자동으로 실행시키는 쉘스크립트 파일이다.
 # 전역 설정 방법: 본 파일을 PATH 경로에 위치시키거나, ~/.bashrc를 수정하여 추가하면 된다.

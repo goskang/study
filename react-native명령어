@@ -1,0 +1,162 @@
+1. 윈도우-파워쉘-관리자권한
+2. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) 실행
+
+npx create-expo-app 프로젝트명
+cd 프로젝트명
+npx eslint --init
+code.
+npm i eslint-plugin-react-hooks --save-dev
+
+.eslintrc.json 파일 수정
+"extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",    
+    "plugin:react/jsx-runtime", ==> 추가
+    "plugin:react-hooks/recommended" ==> 추가
+  ],
+
+.prettierrc 파일 생성 후 입력
+
+{
+  "singleQuote": true,
+  "arrowParens": "always",
+  "tabWidth": 2,
+  "printWidth": 80
+}
+
+
+
+You can also run this command directly using 'npm init @eslint/config'.
+√ How would you like to use ESLint? · problems
+√ What type of modules does your project use? · esm
+√ Which framework does your project use? · react
+√ Does your project use TypeScript? · No
+√ Where does your code run? · browser
+√ What format do you want your config file to be in? · JSON
+Local ESLint installation not found.
+The config that you've selected requires the following dependencies:
+eslint-plugin-react@latest eslint@latest
+√ Would you like to install them now? · Yes
+√ Which package manager do you want to use? · npm
+
+npx expo install react-native@0.69.9
+
+npm install -g -xpo-cli
+expo init 프로젝트명
+cd 프로젝트명프로젝트명
+
+npm i prop-types
+npm exp install ~~~ 
+
+npm start
+npm run android
+npm run ios
+npm run web
+
+
+구글 앱스토어
+- Expo Go 설치
+
+>expo login
+
+
+npx eslint --init
+node select
+typescript N
+
+.eslintrc.json에서
+"extends": [
+    "plugin:react/jsx-runtime"
+ ]
+"rules": {
+    "no-console":"warn"
+  }
+
+백터 아이콘
+https://icons.expo.fyi/Index
+
+
+
+여행 앱 만들기
+1. npx create-expo-app rn-photo
+2. cd rn-photo
+3. npm install @react-navigation/native
+4. npx expo install react-native-screens react-native-safe-area-context 
+5. npm i prop-types
+6. npx eslint --init
+  To check syntax only
+  javascript...
+  react
+ typescript No
+ code run : Node
+ json
+ eslint@latest : Yes
+ npm
+
+7. .eslintrc.json 파일 수정  
+
+  "extends": [
+    "plugin:react/jsx-runtime" ==> 추가
+8. npm i -D
+9. npm install eslint-plugin-react-hooks --save-dev
+10. .eslintrc.json 파일 수정  
+  "extends": [
+    "plugin:react-hooks/recommended" ==> 추가
+  ],
+
+  "rules": {
+    "no-console": "warn" ==> 추가
+  }
+
+11. .prettierrc 파일 생성
+{
+  "singleQuote": true,
+  "arrowParens": "always",
+  "tabWidth": 2,
+  "printWidth": 80
+}
+
+
+12. 아이콘, 로딩화명 이미지 교체 : app.json 파일 수정
+  "expo": {
+    "icon": "./assets/icon.png",
+
+    "splash": {
+      "image": "./assets/splash.png", ==> 수정
+
+  안드로이드인 경우
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff" ==> 아이콘 밑의 색상으로 보통 아이콘 색상과 일치시킴
+      }
+
+13. react-native run-android
+
+14 에뮬레이터 에러 발생시
+react-native doctor
+/*
+  에러진단 완료되면 'e' 눌러서 자동 픽스가능합니다.
+*/
+
+
+15. npm install @react-navigation/native-stack 설치
+
+
+https://www.figma.com/community/file/1155362909441341285/expo-app-icon-splash
+https://www.youtube.com/watch?v=QSNkU7v0MPc
+
+
+
+npm install @react-navigation/stack
+npm install @react-navigation/native
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+
+
+
+
+
+
+
+

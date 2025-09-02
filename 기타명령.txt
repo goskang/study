@@ -521,3 +521,7 @@ port 포트 강제 닫기
 cmd를 관리자 모드로 실행
 netstat -aon | findstr 포트번호
 taskkill /f /pid PID번호
+
+netstat -ano | findstr 8080
+taskkill /f /pid 78688
+

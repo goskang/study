@@ -1,3 +1,9 @@
+**** cmd 창에서 add, commit, push 한번헤 하는 명령어 ****
+
+> git config --global alias.gos "!sh -c 'git add -A && git commit -m \"$1\" && git push' -"
+> git gos "커밋 메시지"
+
+
 
 
 0. git config --global user.name "Your Name"

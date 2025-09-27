@@ -96,3 +96,47 @@ git --version
 git config --global alias.cmp '!f() { git add -A && git commit -m "$@" && git push; }; f'
 git cmp "커밋메시지"
 
+our local changes to the following files would be overwritten by merge:
+        gradlew
+Please commit your changes or stash them before you merge.
+Aborting
+ChatGPT의 말:
+
+지금 상황은 git pull을 했는데, 로컬에서 수정한 파일(gradlew)이 원격 브랜치와 충돌해서 pull이 중단된 것입니다.
+git은 원격 변경 사항이 로컬 수정 내용을 덮어쓰는 걸 방지하려고 막고 있습니다.
+
+해결 방법은 몇 가지가 있어요:
+
+1. 로컬 변경을 살리고 싶을 때
+
+(gradlew 파일에 본인이 수정한 내용이 중요할 때)
+
+# 변경 내용을 임시로 보관
+git stash
+
+# 원격에서 pull 수행
+git pull
+
+# stash 했던 내용 다시 적용
+git stash pop
+
+
+필요하면 이후에 충돌 해결을 하면 됩니다.
+
+2. 로컬 변경을 커밋하고 pull
+
+(gradlew 수정 사항을 프로젝트에 반영하고 싶을 때)
+
+git add gradlew
+git commit -m "수정: gradlew"
+git pull
+
+
+pull 시 충돌이 발생하면 수동으로 해결 후 커밋하면 됩니다.
+
+3. 로컬 변경을 버리고 원격으로 덮어쓰기
+
+(gradlew 수정이 필요 없는 경우)
+
+git reset --hard
+git pull

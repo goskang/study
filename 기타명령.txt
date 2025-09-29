@@ -525,3 +525,15 @@ taskkill /f /pid PID번호
 netstat -ano | findstr 8080
 taskkill /f /pid 78688
 
+
+
+기본 CMD 경로 변경
+Win + R → regedit → Enter
+경로 이동:
+HKEY_CURRENT_USER\Software\Microsoft\Command Processor
+AutoRun 문자열 값이 없다면 새로 만듭니다.
+값 데이터에 아래와 같이 입력:
+cd /d D:\Projects\MyApp
+
+
+이제 cmd를 실행하면 항상 해당 폴더에서 시작합니다.
